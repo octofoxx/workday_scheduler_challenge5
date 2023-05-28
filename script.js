@@ -3,23 +3,23 @@
 // in the html.
 
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `".time-block"` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
 
+  //when a save button is clicked, takes the info user put in and saves to local storage
  $(".saveBtn").on("click",function(){
+
+  //keyword "this" refers back to saveBtn, so ".description" are siblings to it
     var eventInfo = $(this).siblings(".description").val();
     var timeId = $(this).parent().attr("id");
+
+    //uses the timeId as a key to store eventInfo
     localStorage.setItem(timeId, eventInfo); 
   }); 
 
   function newHour (){
+  //gets us the current hour of the day, in 24 hour format  
   var currentTime = dayjs().hour();
 
+  //runs over all time blocks and checks what state they should be in based on time of day
   $(".time-block").each(function(){
     var idHour = parseInt($(this).attr("id"));
     if (idHour < currentTime){
@@ -33,17 +33,12 @@ $(function () {
     }
   })
 }
+
+//actually runs the function to check time of day and state of time blocks
 newHour();
 setInterval(newHour, 1000);
 
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do ".time-block"?
-  //
-
-  /*localStorage.getItem(based on time id)
-  .text("insert pulled from storage here, possible a key from object") */
-
+  //gave the time blocks 24 hour id codes so we can easily check hours after noon. sets all time block descriptions with whatever is in local storage, leaves blank if nothing is there
   $("#9 .description").val(localStorage.getItem("9"));
   $("#10 .description").val(localStorage.getItem("10"));
   $("#11 .description").val(localStorage.getItem("11"));
@@ -54,6 +49,7 @@ setInterval(newHour, 1000);
   $("#16 .description").val(localStorage.getItem("16"));
   $("#17 .description").val(localStorage.getItem("17"));
 
+  //sets the day at bottom of header area
   var today = dayjs();
   $("#currentDay").text(today.format("dddd MMMM DD"))
 });
