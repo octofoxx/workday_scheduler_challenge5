@@ -12,8 +12,8 @@ $(function () {
   //
 
  $(".saveBtn").on("click",function(){
-    var eventInfo = $(".time-block").children(".description").val();
-    var timeId = $(".time-block").attr("id");
+    var eventInfo = $(this).siblings(".description").val();
+    var timeId = $(this).parent().attr("id");
     localStorage.setItem(timeId, eventInfo); 
   }); 
 
