@@ -4,7 +4,7 @@
 
 $(function () {
 
-  //when a save button is clicked, takes the info user put in and saves to local storage
+  //when a save button is clicked, takes the info user put into the scheduler and saves to local storage
  $(".saveBtn").on("click",function(){
 
   //keyword "this" refers back to saveBtn, so ".description" are siblings to it
